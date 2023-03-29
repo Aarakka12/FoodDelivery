@@ -1,0 +1,16 @@
+<%= flash[:notice]%>
+<div class="d-flex align-items-center justify-content-center">
+    <%= image_tag "https://archive.org/download/SansBlackWBG/Sans-Black-WBG.gif", height: 250 %>
+</div>
+<div class="d-flex align-items-center justify-content-center">
+    <%= image_tag "food_logo.png", height: 400 %>
+</div>
+<div class="d-flex align-items-center justify-content-center">
+   <div>
+            <%= link_to "Sign Up", sign_up_path, class:"btn btn-outline-dark me-md-2" %>
+    </div>
+    <div>
+            <%= link_to "Login", login_path, class:"btn btn-outline-dark me-md-2" %>
+    </div>
+</div>
+

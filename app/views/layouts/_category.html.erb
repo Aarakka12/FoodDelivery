@@ -1,0 +1,11 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  <%# <ul id="slide-out" class="side-nav fixed rel"> %>
+    <%# <li class="first z-depth-1">Categories</li> %>
+    <% @categories = @categories.nil? ? Category.all : @categories %>
+    <% @categories.each do |category| %>
+      <%= link_to category.title, category_path(category), class:"nav-link active", id:"nav-home-tab" %>
+    <% end %>
+  <%# </ul> %>
+</div>
+</nav>

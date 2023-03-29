@@ -1,0 +1,4 @@
+<% @c.each do |food| %>
+    <%= food.name %>
+<% end %>
+ <li><%= link_to 'Delete', categories_path(@categories), class:'btn btn-primary', method: :delete, data: {confirm: "Are you sure to delete this category?"} %></li>
