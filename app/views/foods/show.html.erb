@@ -1,0 +1,14 @@
+<div class="full-height scroll-bar">
+  <div class="row">
+    <div class="col s12 m6 l6 flow-text">
+      <h3><%= @food.name%></h3>
+      <p><%= @food.description %></p>
+      <p><%= @food.price %></p>
+    </div>
+</div>
+
+  <div class="container col s12 m6 l6">
+    <% if @food.image.attached? %>
+        <%= image_tag @food.image %>
+    <% end %>
+  </div>

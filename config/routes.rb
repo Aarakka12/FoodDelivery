@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   delete "account", to: "users#destroy"
 
 
+  resources :categories, only: :index
+  resources :foods, only: [:index, :show]
+  resources :orders
+  resources :order_items
+  
   resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
   resources :active_sessions, only: [:destroy] do
