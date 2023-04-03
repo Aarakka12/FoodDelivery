@@ -17,9 +17,8 @@
             <% end %>
           </div>
           <div class="card-action">
-            <div class="right"><i class="material-icons left no-right-margin">shopping_order</i><%= link_to "
-						 #{this_food_in_order(food)}", orders_path, class: "order left no_left_pad no-right-margin", id: "order" %></div>
-              <%= button_to "Add to order", order_items_path(food_id: food.id) %>
+            <div class="right"><i class="material-icons left no-right-margin">shopping_order</i><%= link_to orders_path, class: "order left no_left_pad no-right-margin", id: "order" %></div> 
+              <%= link_to "Add to order", order_items_path(food_id: food.id) %>
       
           </div>
           <div class="card-reveal">

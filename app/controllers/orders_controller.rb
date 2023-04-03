@@ -4,17 +4,12 @@ class OrdersController < ApplicationController
     @order_items = current_order.order_items
   end
 
-  def self.current_order
-    if session[:order_id]
-      @current_order ||= order.find(session[:order_id])
+  def current_order
+    if Order.find_by_id(session[:order_id]).nil?
+      Order.new
+    else
+      Order.find_by_id(session[:order_id])
     end
-
-    if session[:order_id].nil?
-      @current_order = order.create!
-      session[:order_id] = @current_order.id
-    end
-    
-    @current_order
-  end 
+  end
 
 end
