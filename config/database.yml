@@ -23,11 +23,11 @@ default: &default
 
 development:
   <<: *default
-  database: FoodDeliveryApplication_development
+  database: FoodDeliveryApplication_development1
   host: localhost
   port: 5432
-  user: testuser
-  password: test
+  user: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -62,11 +62,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: FoodDeliveryApplication_test
+  database: FoodDeliveryApplication_test1
   host: localhost
   port: 5432
-  user: testuser
-  password: test
+  user: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -89,6 +89,6 @@ test:
 #
 production:
   <<: *default
-  database: FoodDeliveryApplication_production
+  database: FoodDeliveryApplication_production1
   username: FoodDeliveryApplication
   password: <%= ENV['FOODDELIVERYAPPLICATION_DATABASE_PASSWORD'] %>

@@ -25,11 +25,13 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'activeadmin'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootstrap', '~> 5.2.2'
 
 gem 'jquery-rails'
+
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
