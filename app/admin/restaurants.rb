@@ -5,7 +5,7 @@ ActiveAdmin.register Restaurant do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :opening_time, :closing_time
+  permit_params :name, :address, :phone
   #
   # or
   #

@@ -1,6 +1,9 @@
 module OrdersHelper
-    # def increment(item_id)
-    #     @order_data[item_id] ||= 0
-    #     increment_order_item_by_one(item_id)
-    # end
+    def current_order
+        if Order.find_by_id(session[:order_id]).nil?
+          Order.new
+        else
+          Order.find_by_id(session[:order_id])
+        end
+    end
 end

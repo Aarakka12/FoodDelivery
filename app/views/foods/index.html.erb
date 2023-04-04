@@ -1,29 +1,29 @@
 <div class="row full-height">
- <%=render 'layouts/category' %>
- <div class="col s9 full-height scroll-bar">
+ <div class="container text-center">
    <div class="panel header-panel flow-text z-depth-3"><%= (!@category.nil?) ? @category.title : "All cuisines"  %></div>
-  <div class="row"> <% @foods = (!@category.nil?) ? @categories.foods : @foods  %>
+ <%=render partial:'layouts/category', locals: { categories:@categories, restaurant:@restaurant } %>
+  <div class="row"> 
   <% @foods.each do |food| %>
       <div class="col s12 m6 l4">
-        <div class="card">
+        <div  class="card" style="width: 18rem;">
           <div class="card-image">
           
             <span class="activator"><i class="material-icons right">more_vert</i></span>
             <% if food.image.attached? %>
-              <div class='col-lg-4'>
-                <%= image_tag food.image, class:'img-fluid' %>
-                <span class="card-title"><%= food.name %></span>
+              <div class='col-lg-12'>
+                <%= image_tag food.image, class:"card-img-top" %>
+                <span class="card-title"><h3 class="card-title"><%= food.name %></h3></span>
               </div>
             <% end %>
           </div>
           <div class="card-action">
-            <div class="right"><i class="material-icons left no-right-margin">shopping_order</i><%= link_to orders_path, class: "order left no_left_pad no-right-margin", id: "order" %></div> 
-              <%= link_to "Add to order", order_items_path(food_id: food.id) %>
+            <div class="right"><i class="material-icons left no-right-margin">shopping_order</i><%= link_to "Order", orders_path, class: "order left no_left_pad no-right-margin", id: "order" %></div> 
+              <%= link_to "Add to order", order_items_path(food_id: food.id, quantity: 1), method: :post, class:"btn btn-info" %>
       
           </div>
           <div class="card-reveal">
-            <p><%= food.price%></p>
-            <p><%= food.description%></p>
+            <p class="card-text"><%= food.price%></p>
+            <p class="card-text"><%= food.description%></p>
           </div>
         </div>
       </div>
