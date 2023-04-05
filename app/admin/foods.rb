@@ -1,5 +1,11 @@
 ActiveAdmin.register Food do
   
+  controller do
+    def scoped_collection
+      end_of_association_chain.where(restaurant: current_admin_user.restaurants)
+    end
+  end
+    
   permit_params [:name, :description, :price, :image, :category_id, :restaurant_id]
 
   form do |f|
@@ -24,13 +30,13 @@ ActiveAdmin.register Food do
     column :category
     column :restaurant    
     # column :prep_time
-    column :image do |food|
-      if food.image.attached?
-        image_tag food.image.variant(resize: "100*100")
-      else
-        content_tag(:span, "No Image")
-      end
-    end
+    # column :image do |food|
+    #   if food.image.attached?
+    #     image_tag food.image.variant(resize: "100*100")
+    #   else
+    #     content_tag(:span, "No Image")
+    #   end
+    # end
     actions
   end
 
@@ -41,13 +47,13 @@ ActiveAdmin.register Food do
       row :price
       row :category
       row :restaurant
-      row :image do |food|
-        if food.image.attached?
-          image_tag food.image.variant(resize: "400*400")
-        else
-          content_tag(:span, "No Image")
-        end
-      end
+      # row :image do |food|
+      #   if food.image.attached?
+      #     image_tag food.image
+      #   else
+      #     content_tag(:span, "No Image")
+      #   end
+      # end
     end
   end
 end
