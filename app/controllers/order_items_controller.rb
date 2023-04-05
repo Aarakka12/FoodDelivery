@@ -1,14 +1,22 @@
-# require_relative "order_controller.rb"
+# require_relative "orders_controller.rb"
 class OrderItemsController < ApplicationController
 
+  include OrdersHelper
+
     before_action :set_order
-      
+    
     def create
-        @order_item = @order.order_items.new(order_params)
-        @order.save
-        session[:order_id] = @order.id
+      # byebug
+      @order_item = @order.order_items.new(order_item_params)
+      @order.save
+      session[:order_id] = @order.id
     end
-      
+    
+    def index
+      # @order_items = OrderItem.where(order_id: @order.id)
+      @order_items = OrderItem.all
+    end
+
     def update
         @order_item = @order.order_items.find(params[:id])
         @order_item.update_attributes(order_params)
@@ -23,8 +31,8 @@ class OrderItemsController < ApplicationController
       
     private
       
-        def order_params
-          params.require(:order_item).permit(:food_id, :order_id, :quantity)
+        def order_item_params
+          params.permit(:food_id, :quantity)
         end
       
         def set_order
