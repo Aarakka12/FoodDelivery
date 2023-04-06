@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
- 
+  
+  root to: 'main#index'
+  # get 'restaurants/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # get "home", to: 'home#index'
   
-  root to: 'home#index'
+  # get "root", to: "main#index"
   get 'password', to: 'passwords#edit'
   get "password", to: "passwords#edit", as: :edit_password
   patch "password", to: "passwords#update"
@@ -21,6 +23,18 @@ Rails.application.routes.draw do
   delete "account", to: "users#destroy"
 
 
+  # get "customer_index", to: "home#cutomer_index"
+
+  resources :categories, only: :index
+  resources :restaurants, only: [:index] do
+    resources :foods, only: [:index, :show]
+  end
+  
+  resources :order_items
+  resources :orders
+  resources :admin_users, only: [:index]
+  resources :menu_items, only: [:index]
+  
   resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
   resources :active_sessions, only: [:destroy] do

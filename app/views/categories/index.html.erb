@@ -1,0 +1,15 @@
+<div class="col s3 mini-pad z-depth-3 full-height scroll-bar table-cloth">
+  <ul id="slide-out" class="side-nav fixed rel">
+    <li class="first z-depth-1">Categories</li>
+    <%# @categories = @categories.nil? ? Category.all : @categories %>
+    <% @categories.each do |category| %>
+       <h3><%= category.title %></h3>
+        <% category.foods.each do |food| %>
+            <h4><%= food.name %></h4>
+            
+        <% end %>
+      <li><%= link_to category.title, category_foods_path(category) %> 
+    <% end %>
+   
+  </ul>
+</div>
