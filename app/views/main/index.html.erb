@@ -1,5 +1,7 @@
 <%= flash[:notice]%>
 <div class="d-flex align-items-center justify-content-center">
     <h1>Welcome</h1>
+    <%= button_to "Restaurant", new_admin_user_session_path %>
+    <%= button_to "Customer", login_path, method: :get %>
 </div>
 

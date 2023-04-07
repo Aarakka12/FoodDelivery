@@ -31,6 +31,8 @@ gem 'bootstrap', '~> 5.2.2'
 
 gem 'jquery-rails'
 
+gem 'bootsnap', require: false
+
 gem 'devise'
 
 group :development, :test do

@@ -1,14 +1,6 @@
-<div class="full-height scroll-bar">
-  <div class="row">
-    <div class="col s12 m6 l6 flow-text">
-      <h3><%= @food.name%></h3>
-      <p><%= @food.description %></p>
-      <p><%= @food.price %></p>
-    </div>
-</div>
-
-  <div class="container col s12 m6 l6">
-    <% if @food.image.attached? %>
-        <%= image_tag @food.image %>
-    <% end %>
-  </div>
+<%= form_with model: current_user.cart.cart_items.new do |f| %> 
+  <%= f.hidden_field :food_id, value: @food.id %> 
+  <%= f.label :quantity %> 
+  <%= f.number_field :quantity, value: 1, min: 1 %> 
+  <%= f.submit "Add to Cart" %> 
+<% end %>

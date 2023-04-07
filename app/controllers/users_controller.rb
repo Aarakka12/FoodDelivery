@@ -45,6 +45,11 @@ class UsersController < ApplicationController
     def new
         @user = User.new
     end
+
+    def orders
+      @orders = current_user.orders.order(created_at: :desc)      
+    end
+    
     
     private
     

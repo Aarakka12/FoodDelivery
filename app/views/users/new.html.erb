@@ -14,7 +14,14 @@
 
   <!-- Jumbotron -->
   <%= form_with model: @user, url: sign_up_path do |form| %>
-  <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+  <%#= render partial: "shared/form_errors", locals: { object:@user} %>
+  <% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+     <div class="alert alert-danger" ><%= message %></div>
+    <% end %>
+  </ul>
+<% end %>
   <div class="container py-4">
     <div class="row g-0 align-items-center">
       <div class="col-lg-6 mb-5 mb-lg-0">

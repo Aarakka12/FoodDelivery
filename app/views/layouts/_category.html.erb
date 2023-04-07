@@ -2,10 +2,10 @@
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
   <%# <ul id="slide-out" class="side-nav fixed rel"> %>
     <%# <li class="first z-depth-1">Categories</li> %>
-    <% @categories = @categories.nil? ? Category.all : @categories %>
-    <% @categories.each do |category| %>
-      <%= link_to category.title,  foods_path(@category), class:"nav-link active", id:"nav-home-tab" %>
-    <% end %>
+    <%= link_to "All", restaurant_foods_path(restaurant), class:"nav-link", id:"nav-home-tab" %>
+    <% categories.each do |category| %>
+    <%= link_to category.title,  restaurant_foods_path(restaurant,category:category.id), class:"nav-link", id:"nav-home-tab", data_bs_toggle:"tab", data_bs_target:"#nav-home", type:"button", role:"tab", aria_controls:"nav-home", aria_selected:"true" %>
+      <% end %>
   <%# </ul> %>
 </div>
 </nav>

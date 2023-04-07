@@ -1,4 +1,6 @@
 ActiveAdmin.register AdminUser do
+  # belongs_to :restaurant, optional: true
+
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -27,6 +29,7 @@ ActiveAdmin.register AdminUser do
   # end
 
   filter :email
+
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -34,6 +37,7 @@ ActiveAdmin.register AdminUser do
   form do |f|
     f.inputs do
       f.input :email
+  
       f.input :password
       f.input :password_confirmation
     end

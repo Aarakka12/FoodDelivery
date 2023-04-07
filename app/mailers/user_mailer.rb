@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.confirmation.subject
   #
-  default from: User::MAILER_FROM_EMAIL
+  # default from: User::MAILER_FROM_EMAIL
 
   def confirmation(user, confirmation_token)
     @user = user

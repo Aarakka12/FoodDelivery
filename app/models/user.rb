@@ -11,6 +11,11 @@ class User < ApplicationRecord
     attr_accessor :current_password
 
     has_many :active_sessions, dependent: :destroy
+    # has_one :cart
+    has_many :order_items
+    has_one :cart
+    has_one :order
+    # has_many :cart_items, through: :carts
 
     has_secure_password
 
@@ -26,6 +31,12 @@ class User < ApplicationRecord
 
     validates :unconfirmed_email, format: {with: URI::MailTo::EMAIL_REGEXP, allow_blank: true}
 
+    after_create :create_cart
+
+    def create_cart
+      Cart.create(user: self)
+    end
+    
 
     def confirm!
       if unconfirmed_or_reconfirming?
