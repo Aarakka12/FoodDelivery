@@ -32,13 +32,11 @@ Rails.application.routes.draw do
   resources :orders 
   resources :order_items
 
-  resources :carts do
-    member do
-      post :checkout_items
-    end
-  end
+
+  
   resources :cart_items
-  # resources :checkouts 
+  get 'checkout', to: 'carts#checkout'
+ 
   resources :admin_users, only: [:index]
 
   resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
@@ -49,7 +47,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'account/orders', to: 'users#orders', as: 'user_orders'
+  # get 'account/orders', to: 'users#orders', as: 'user_orders'
   # post '/carts', to: 'carts#create', as: 'add_to_cart'
  
   # get '/orders/:id/items', to: 'orders#items', as: 'order_items'
