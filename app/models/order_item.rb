@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
     belongs_to :food
     belongs_to :order
     belongs_to :user
-
+    has_one :cart_item
     before_save :set_unit_price
     before_save :set_total
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_07_135848) do
+ActiveRecord::Schema.define(version: 2023_04_10_143808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 2023_04_07_135848) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_carts_on_order_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -158,8 +160,15 @@ ActiveRecord::Schema.define(version: 2023_04_07_135848) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.float "total"
+    t.bigint "cart_id", null: false
+    t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -189,12 +198,14 @@ ActiveRecord::Schema.define(version: 2023_04_07_135848) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "foods"
+  add_foreign_key "carts", "orders"
   add_foreign_key "carts", "users"
   add_foreign_key "foods", "categories"
   add_foreign_key "foods", "restaurants"
   add_foreign_key "menu_items", "categories"
   add_foreign_key "menu_items", "foods"
   add_foreign_key "order_items", "users"
+  add_foreign_key "orders", "carts"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"
   add_foreign_key "restaurants", "admin_users"

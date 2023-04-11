@@ -14,7 +14,8 @@ class User < ApplicationRecord
     # has_one :cart
     has_many :order_items
     has_one :cart
-    has_one :order
+    has_many :orders
+    has_one :payment
     # has_many :cart_items, through: :carts
 
     has_secure_password
