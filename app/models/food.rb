@@ -6,13 +6,14 @@ class Food < ApplicationRecord
   belongs_to :restaurant
   # has_many :menu_items
   has_many :cart_items
+
   def self.for_restaurant(restaurant_id)
     where(restaurant_id: restaurant_id)    
   end
   
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 
-    def add_to_cart(cart)
+    def create(cart)
       if quantity > 0
         cart_item = cart.cart_items.find_by(food_id: id)
         if cart_item
@@ -22,6 +23,9 @@ class Food < ApplicationRecord
         end
         update(quantity: quantity - 1)
         cart_item
+      else
+        cart_item = nil
+        errors.add(:base, "Sorry, this item is out of stock")
       end
     end
 

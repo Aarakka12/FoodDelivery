@@ -11,7 +11,7 @@
             <span class="activator"><i class="material-icons right">more_vert</i></span> %>
             <% if food.image.attached? %>
               <%# <div class='col-lg-4'> %>
-                <%= image_tag food.image, class:"card-img-top" %>
+                <%= image_tag food.image, class:"card-img-top", height:"280" %>
                 <%# <span class="card-title"><%= food.name</span> %>
               <%# </div> %>
             <% end %>
@@ -27,6 +27,7 @@
               <%= button_to "Add to Cart", carts_path(food_id: food.id), method: :post, class: "btn btn-primary" %>
               <%# <% @cart.inspect %> 
           </div>
+          
           <%# </div> %>
           <%# <div class="card-action"> %>
       

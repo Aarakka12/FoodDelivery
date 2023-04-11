@@ -12,10 +12,11 @@ class User < ApplicationRecord
 
     has_many :active_sessions, dependent: :destroy
     # has_one :cart
-    has_many :order_items
+    has_many :cart_items
     has_one :cart
     has_many :orders
-    has_one :payment
+    has_many :addresses
+    belongs_to :default_address, class_name: 'Address', optional: true
     # has_many :cart_items, through: :carts
 
     has_secure_password
@@ -34,6 +35,10 @@ class User < ApplicationRecord
 
     after_create :create_cart
 
+    before_save :set_default_address_id
+
+   
+    
     def create_cart
       Cart.create(user: self)
     end
@@ -116,5 +121,9 @@ class User < ApplicationRecord
     def downcase_unconfirmed_email
       return if unconfirmed_email.nil?
       self.unconfirmed_email = unconfirmed_email.downcase
+    end
+
+    def set_default_address_id
+      self.default_address_id = addresses.find_by(id: default_address_id)&.id
     end
 end

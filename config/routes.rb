@@ -51,6 +51,11 @@ Rails.application.routes.draw do
 
   resources :payments
   get 'account/orders', to: 'users#orders', as: 'user_orders'
+
+  resources :addresses
+
+  patch '/cart_items/:id/increment_quantity', to: 'cart_items#increment_quantity', as: 'increment_quantity'
+  patch '/cart_items/:id/decrement_quantity', to: 'cart_items#decrement_quantity', as: 'decrement_quantity'
   # post '/carts', to: 'carts#create', as: 'add_to_cart'
  
   # get '/orders/:id/items', to: 'orders#items', as: 'order_items'
