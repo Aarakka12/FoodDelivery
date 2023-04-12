@@ -3,7 +3,12 @@ class CartItemsController < ApplicationController
       def destroy
         cart_item = CartItem.find(params[:id])
         cart_item.destroy
-        redirect_to cart_path, notice: "Item removed from cart."
+        respond_to do |format|
+          format.html { redirect_to cart_path }
+          format.json { render :json => {:message => "success", :body => cart_item.id} }
+          # debugger
+        end
+        # redirect_to cart_path, notice: "Item removed from cart."
       end
 
       def increment_quantity
