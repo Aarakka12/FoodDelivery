@@ -1,0 +1,86 @@
+<h3 class="text-center">Items Added</h3>
+<% @cart_items.each do |cart_item| %><br/>
+  <%# <div class="cart-item"> %>
+  <div class="row">
+  <div class="col-sm-9 p-3">
+    <h4><%= cart_item.food.name %></h4> 
+    <p>Price: <%= number_to_currency(cart_item.food.price) %></p> 
+  </div>
+  <div class="col-3 p-3 mb-2">
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <%= button_to '-', decrement_quantity_path(cart_item), method: :patch, type:"button", class:"btn btn-outline-primary" %>
+        <button type="button" class="btn btn-outline-primary"><%= cart_item.quantity %></button>
+        <%= button_to '+', increment_quantity_path(cart_item), method: :patch, type:"button", class:"btn btn-outline-primary" %>
+      </div>
+       <%# <%= link_to "Delete", cart_item, method: :delete, data: { confirm: "Are you sure you want to remove this item?" }, class: "btn btn-danger" %>  
+       <button id="<%=cart_item.id%>", onclick="delete_cart_item(this)">Delete</button>
+      <br/><br/>
+    </div>
+    </div>
+<% end %><br/>
+ <%= link_to "Add More Item", restaurants_path, class: "btn btn-info" %> 
+
+
+<h3 class="text-center">Bill Summary</h3>
+
+<% if current_user.cart.cart_items %>
+  <table class="table table-borderless ">
+    <thead >
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.cart.cart_items.each do |item| %>
+        <tr>
+          <td ><%= item.food.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= (item.food.price) %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="2">Subtotal:</td>
+        <td><%= (current_user.cart.subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="2">Total:</td>
+        <td><%=(current_user.cart.total) %></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>
+
+<h3 class="text-center">Your Details</h3>
+<%= current_user.first_name %> <%= current_user.last_name%><br/>
+<%= current_user.email %>
+<br/><br/>
+<%= link_to 'Addresses',addresses_path, class:'link-underline-light"'%>
+<br/><br/>
+<%= link_to "Place Order", order_path, class: "btn btn-primary d-grid gap-2" %><br/>
+
+
+<script>
+  function delete_cart_item(e) {
+    // debugger
+    var url = "/cart_items/" + e.id
+    // console.log(url)
+    // debugger
+
+    $.ajax({
+      url: url,
+      method: 'delete', 
+      dataType: "json",
+      success:function(data) {
+        if(data.message == 'success') {
+          // console.log(document.getElementById(data.body.id));          
+          document.getElementById(data.body.id)
+          e.parentElement.parentElement.remove();
+        }
+      }
+    })
+  }
+</script>
